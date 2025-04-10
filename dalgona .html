@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dalgona Deciders</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --main-color: #d76a03;
+      --bg-color: #f8f8f8;
+      --text-color: #000;
+      --card-bg: #fff;
+    }
+
+    body.dark-mode {
+      --bg-color: #1a1a1a;
+      --text-color: #fff;
+      --card-bg: #2a2a2a;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: 0.3s;
+    }
+
+    header {
+      background-color: var(--main-color);
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      position: relative;
+    }
+
+    #themeToggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: white;
+      color: var(--main-color);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    nav {
+      background-color: var(--main-color);
+    }
+
+    nav .nav-link {
+      color: white !important;
+      font-weight: bold;
+    }
+
+    nav .nav-link:hover {
+      background-color: #c45508;
+    }
+
+    .content-section {
+      display: none;
+      padding: 40px 20px;
+    }
+
+    .active-section {
+      display: block;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .product-card button {
+      margin-top: 10px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .order-box {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .network-error {
+      color: red;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: var(--main-color);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dalgona Deciders</h1>
+  <p>Crafting the Sweetest Challenges</p>
+  <button id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+</header>
+
+<nav class="nav justify-content-center py-2">
+  <a class="nav-link" href="#" onclick="showSection('home')">HOME</a>
+  <a class="nav-link" href="#" onclick="showSection('about')">ABOUT</a>
+  <a class="nav-link" href="#" onclick="showSection('mission')">MISSION/VISION</a>
+  <a class="nav-link" href="#" onclick="showSection('products')">PRODUCTS</a>
+  <a class="nav-link" href="#" onclick="showSection('links')">LINKS</a>
+  <a class="nav-link" href="#" onclick="showSection('feedback')">FEEDBACK</a>
+  <a class="nav-link" href="#" onclick="showSection('contact')">CONTACT</a>
+</nav>
+
+<div id="home" class="content-section active-section text-center">
+  <h2>Welcome to Dalgona Deciders</h2>
+  <p>We create fun, tasty Dalgona cookies and partner with Pixel Forge Games to bring you sweet challenges in both food and gaming!</p>
+</div>
+
+<div id="about" class="content-section">
+  <h2>About Us</h2>
+  <p>We’re on a mission to make Dalgona candy fun again through food fests, game collabs, and interactive candy challenges.</p>
+</div>
+
+<div id="mission" class="content-section">
+  <h2>Mission & Vision</h2>
+  <p><strong>Mission:</strong> Make sweets more fun and memorable through unique edible challenges.</p>
+  <p><strong>Vision:</strong> Become the global go-to for Dalgona candy and candy-based entertainment.</p>
+</div>
+
+<div id="products" class="content-section">
+  <h2>Our Products</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card product-card p-3">
+        <img src="https://i.imgur.com/t9Igf9J.png" alt="Star">
+        <h5 class="mt-3">Star Dalgona Cookie - $3</h5>
+        <button class="btn btn-warning" onclick="openOrder('Star Dalgona Cookie', 'https://i.imgur.com/t9Igf9J.png')">Buy Now</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card product-card p-3">
+        <img src="https://i.imgur.com/Sj4W8Pb.png" alt="Circle">
+        <h5 class="mt-3">Circle Dalgona Cookie - $2.50</h5>
+        <button class="btn btn-warning" onclick="openOrder('Circle Dalgona Cookie', 'https://i.imgur.com/Sj4W8Pb.png')">Buy Now</button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card product-card p-3">
+        <img src="https://i.imgur.com/nixzAO7.png" alt="Umbrella">
+        <h5 class="mt-3">Umbrella Dalgona Cookie - $3.50</h5>
+        <button class="btn btn-warning" onclick="openOrder('Umbrella Dalgona Cookie', 'https://i.imgur.com/nixzAO7.png')">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="links" class="content-section">
+  <h2>Useful Links</h2>
+  <ul>
+    <li><a href="https://pixelforge.games" target="_blank">Pixel Forge Games</a></li>
+    <li><a href="https://instagram.com/dalgonadeciders" target="_blank">Our Instagram</a></li>
+    <li><a href="https://maps.google.com" target="_blank">Location</a></li>
+  </ul>
+</div>
+
+<div id="feedback" class="content-section">
+  <h2>Feedback</h2>
+  <form>
+    <input type="text" class="form-control mb-2" placeholder="Your Name" required>
+    <input type="email" class="form-control mb-2" placeholder="Your Email" required>
+    <textarea class="form-control mb-2" rows="4" placeholder="Your Feedback" required></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div id="contact" class="content-section">
+  <h2>Contact Us</h2>
+  <p><strong>Email:</strong> muhammad15330@fpseagles.com</p>
+  <p><strong>Phone:</strong> 03212482009</p>
+  <p><strong>Address:</strong> Foundation Public School</p>
+</div>
+
+<!-- ORDER POPUP -->
+<div class="overlay" id="orderPopup">
+  <div class="order-box">
+    <img id="orderImage" src="" alt="Order Image" style="width:100px;">
+    <h3 id="orderTitle">Your Order</h3>
+    <p><strong>Email:</strong> muhammad15330@fpseagles.com</p>
+    <p><strong>Phone:</strong> 03212482009</p>
+    <p><strong>Address:</strong> Foundation Public School</p>
+    <img src="https://i.imgur.com/XpyaWqC.jpg" class="img-fluid my-2" alt="Order Visual">
+    <button class="btn btn-success mt-2" onclick="showNetworkError()">Proceed to Pay</button>
+    <p class="network-error mt-2" id="errorMsg" style="display: none;">⚠️ Network error. Please try again later.</p>
+    <button class="btn btn-danger mt-2" onclick="closeOrder()">Close</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Dalgona Deciders. All rights reserved.</p>
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.content-section').forEach(section => {
+      section.classList.remove('active-section');
+    });
+    document.getElementById(id).classList.add('active-section');
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  function openOrder(name, img) {
+    document.getElementById('orderTitle').textContent = name;
+    document.getElementById('orderImage').src = img;
+    document.getElementById('errorMsg').style.display = 'none';
+    document.getElementById('orderPopup').classList.add('active');
+  }
+
+  function closeOrder() {
+    document.getElementById('orderPopup').classList.remove('active');
+  }
+
+  function showNetworkError() {
+    document.getElementById('errorMsg').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
